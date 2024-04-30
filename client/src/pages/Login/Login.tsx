@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import './Login.css';
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -58,6 +59,9 @@ const Login = () => {
         >
           Login
         </Button>
+        <Typography variant="body1" className="link1">
+          Don't have an account? <Link to="/signup">Sign up</Link>
+        </Typography>
       </Box>
     </Container>
   );

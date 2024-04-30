@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 50vh; /* Reduce the height of the container */
+  margin-top: 60px;
  
 }
 
@@ -29,4 +30,8 @@
 
 .form-button:hover {
   background-color: #388e3c; /* Darker shade of green on hover */
+}
+.link1{
+    
+  padding-top:20px;
 }

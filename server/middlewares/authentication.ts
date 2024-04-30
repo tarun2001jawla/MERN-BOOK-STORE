@@ -27,4 +27,27 @@ function checkForAuthentication(req: CustomRequest, res: Response, next: NextFun
   }
 }
 
-export { checkForAuthentication };
+const checkAdminRole = (req: CustomRequest, res: Response, next: NextFunction) => {
+  try {
+    // Retrieve the user from the request object
+    const user = req.user;
+
+    // Check if the user exists and has an admin role
+    if (user && user.role === 'admin') {
+      // User has admin role, proceed to the next middleware
+      next();
+    } else {
+      // User does not have admin role, return 403 Forbidden
+      return res.status(403).json({ message: 'Forbidden - Admin role required' });
+    }
+  } catch (err) {
+    // Handle any errors
+    console.error('Error in checkAdminRole middleware:', err);
+    res.status(500).send('Internal Server Error while checking admin role');
+  }
+};
+
+
+
+
+export { checkForAuthentication ,checkAdminRole};

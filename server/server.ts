@@ -7,6 +7,9 @@ import path from "path";
 import ejs from 'ejs';
 import { checkForAuthentication } from "./middlewares/authentication";
 import authRoutes from "./routes/authRoutes";
+import bookRoutes from "./routes/bookRoutes";
+import { CustomRequest } from "./types";
+import Books from "./models/Book";
 
 
 
@@ -33,17 +36,30 @@ mongoose
   .connect(process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/bookstore", {})
   .then(() => console.log("MongoDB connection established"))
   .catch((err) => console.error("MongoDB connection error:", err));
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 
 //Routes
 app.use("/api/user", authRoutes);
+app.use("/api/books",bookRoutes);
 
-// Route for the home page
-staticRouter.get('/', (req: Request, res: Response) => {
-  res.render('index', { title: 'Home Page' });
+app.get('/', async (req:CustomRequest, res:Response) => {
+  const allBooks = await Books.find({}).sort({ createdAt: -1 }).populate("createdBy")
+
+ 
+
+  res.render('home', {
+      user: req.user,
+      
+      
+  });
 });
+
+// // Route for the home page
+// staticRouter.get('/', (req: Request, res: Response) => {
+//   res.render('index', { title: 'Home Page' });
+// });
 
 // Start the server
 app.listen(PORT, () => {

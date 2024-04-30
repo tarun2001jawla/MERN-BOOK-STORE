@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import './Signup.css';
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -67,7 +68,6 @@ const SignUp = () => {
         <TextField
           label="Mobile Number"
           variant="outlined"
-         
           fullWidth
           margin="normal"
           name="mob_number"
@@ -83,6 +83,9 @@ const SignUp = () => {
         >
           Sign Up
         </Button>
+        <Typography variant="body1" className="link1">
+          Already have an account? <Link to="/login">Login</Link>
+        </Typography>
       </Box>
     </Container>
   );
