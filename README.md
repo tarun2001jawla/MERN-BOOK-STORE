@@ -5,6 +5,9 @@ runme:
 ---
 
 ```sh {"id":"01HWQFRS3M37R3APVAT43S3Y69"}
+
+```
+
 # Book Store E-commerce App 📚🛒
 
 Welcome to the Book Store E-commerce App! This project is a full-stack web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It provides users with an immersive and convenient online shopping experience for books and related products.
@@ -56,6 +59,4 @@ Contributions are welcome! Feel free to submit issues and pull requests to help 
 
 ## License 📝
 
-This project is licensed under the [MIT License](LICENSE).
-
-```
+This project is licensed under the [MIT License](LICENSE).
