@@ -1,18 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom'; 
-
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  InputBase,
-  Badge,
-} from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import UserNavigation from '../../components/UserNavigation';
+import { getCookie } from '../../utils/cookieUtil';
+import { decodeToken } from '../../utils/jwtUtil';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -51,6 +44,32 @@ const useStyles = makeStyles((theme) =>
 
 const BookstoreNavbar: React.FC = () => {
   const classes = useStyles();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+
+  useEffect(() => {
+    // Check if the user is logged in when the component mounts
+    const token = getCookie('token');
+    console.log(token)
+    if (token) {
+      const decodedToken = decodeToken(token);
+      if (decodedToken) {
+        // If a valid token is present, set the user as logged in
+        setIsLoggedIn(true);
+        setUserName(decodedToken.name); // Set the user's name from the token payload
+        setCartItemCount(2); // Replace with the user's cart item count from the token
+      }
+    }
+  }, []);
+
+  const handleLogout = () => {
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    setIsLoggedIn(false);
+    setUserName('');
+    setCartItemCount(0);
+  };
 
   return (
     <div className={classes.root}>
@@ -73,20 +92,24 @@ const BookstoreNavbar: React.FC = () => {
             />
           </div>
           <div>
-            <Button component={Link} to="/" color="inherit">Home</Button>
+            <Button component={Link} to="/" color="inherit">
+              Home
+            </Button>
             <Button color="inherit">Books</Button>
-            <Button color="inherit">About Us</Button>
-            <Button  component={Link} to="/contact" color="inherit">Contact Us</Button>
+            <Button component={Link} to="/about" color="inherit">
+              About Us
+            </Button>
+            <Button component={Link} to="/contact" color="inherit">
+              Contact Us
+            </Button>
           </div>
           <div>
-            <IconButton aria-label="show cart items" color="inherit">
-              <Badge badgeContent={2} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-            <Button  component={Link} to="/login" color="inherit">Login</Button>
-            <Button  component={Link} to="/signup" color="inherit">Sign Up</Button>
-            <Button color="inherit">Logout</Button>
+            <UserNavigation
+              isLoggedIn={isLoggedIn}
+              userName={userName}
+              cartItemCount={cartItemCount}
+              onLogout={handleLogout}
+            />
           </div>
         </Toolbar>
       </AppBar>

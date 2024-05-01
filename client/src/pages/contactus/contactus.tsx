@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, makeStyles } from '@material-ui/core';
 import emailjs from 'emailjs-com';
+
 emailjs.init("2RFZeop-dvSg9GIhL");
 
 const useStyles = makeStyles((theme) => ({
@@ -8,14 +9,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '80vh', 
+    height: '80vh',
   },
   form: {
-    width: '60%', 
+    width: '60%',
     padding: theme.spacing(3),
-  
     borderRadius: theme.spacing(1),
-    boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', 
+    boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)',
   },
 }));
 
@@ -25,49 +25,41 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [query, setQuery] = useState('');
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
-   
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
-   
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
-    
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-  
     try {
       const templateParams = {
         name: name,
         email: email,
         query: query,
       };
-  
       await emailjs.send(
         'service_2d895y9',
         'template_npyilwa',
         templateParams,
         '2RFZeop-dvSg9GIhL'
       );
-  
       alert('Email sent successfully');
     } catch (error) {
       alert(`Error sending email: ${error}`);
     }
-  
     // Clear form fields after submission
     setName('');
     setEmail('');
     setQuery('');
   };
-  
 
   return (
     <div className={classes.formContainer}>
@@ -117,5 +109,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
-

@@ -43,17 +43,11 @@ const handleUserLogin = async (req: Request, res: Response) => {
       console.error('Invalid Credentials');
       return res.status(400).json({ message: 'Invalid email or password' });
     }
-   
     // Generating JWT Token
     const token = setUser(user);
     console.log('Token generated:', token);
-    
-    // Set the token in the cookie
-    res.cookie("token", token);
-    console.log("Token is set in cookie");
-
-    res.redirect('/');
-    
+    // Send the token in the response
+    res.status(200).json({ message: 'Login successful', user: user, token });
   } catch (err) {
     console.error('Error in login:', err);
     res.status(500).json({ message: 'Something went wrong while logging in' });

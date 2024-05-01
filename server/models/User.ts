@@ -30,7 +30,6 @@ const userSchema: Schema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: true,
       default: "user", // Set the default role to "user"
     },
   },
