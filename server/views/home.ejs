@@ -8,7 +8,7 @@
     <title>Book Management</title>
 </head>
 <body>
-    <% if (locals.user.role === 'admin') { %>
+    <% if (user && user.role === 'admin') { %>
         <div>
             <button>Add a Book</button>
             <button>Delete a Book</button>
@@ -16,7 +16,12 @@
     <% } %>
     <div>
         <h2>All Books</h2>
-        <!-- Display all books -->
+        <ul>
+            <% allBooks.forEach(book => { %>
+                <li><%= book.title %> - <%= book.author %></li>
+                <!-- Add more book details as needed -->
+            <% }); %>
+        </ul>
     </div>
 </body>
 </html>

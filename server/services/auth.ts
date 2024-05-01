@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import ms from 'ms';
 import dotenv from 'dotenv';
 
-// Load environment variables from .env file
+// Load environment variables from.env file
 dotenv.config();
 
 const key = process.env.JWT_SECRET_KEY;
@@ -10,12 +10,13 @@ const key = process.env.JWT_SECRET_KEY;
 interface User {
   _id: string;
   email: string;
+  role: string;
 }
 
 function setUser(user: User): string {
   try {
     const token = jwt.sign(
-      { _id: user._id, email: user.email},
+      { _id: user._id, email: user.email, role: user.role },
       key!,
       { expiresIn: ms('1h') }
     );

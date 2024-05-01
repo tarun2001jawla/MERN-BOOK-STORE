@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Login.css';
 import { Link } from "react-router-dom";
 
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -26,7 +27,10 @@ const Login = () => {
   };
 
   return (
+    <div>
+      
     <Container maxWidth="xs" className="login-container">
+      
       <Box className="form-box">
         <Typography variant="h4" className="form-title">
           Login
@@ -64,6 +68,7 @@ const Login = () => {
         </Typography>
       </Box>
     </Container>
+    </div>
   );
 };
 

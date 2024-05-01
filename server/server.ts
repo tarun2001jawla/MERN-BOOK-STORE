@@ -45,12 +45,13 @@ app.use("/api/user", authRoutes);
 app.use("/api/books",bookRoutes);
 
 app.get('/', async (req:CustomRequest, res:Response) => {
-  const allBooks = await Books.find({}).sort({ createdAt: -1 }).populate("createdBy")
-
+  const allBooks = await Books.find({}).sort({ createdAt: -1 }).populate("title")
+     
  
-
+  console.log(req.user);
   res.render('home', {
       user: req.user,
+      allBooks : allBooks,
       
       
   });

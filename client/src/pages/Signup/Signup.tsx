@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Signup.css';
 import { Link } from "react-router-dom";
 
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -28,7 +29,10 @@ const SignUp = () => {
   };
 
   return (
+    <div>
+      
     <Container maxWidth="xs" className="signup-container">
+      
       <Box className="form-box">
         <Typography variant="h4" className="form-title">
           Sign Up
@@ -88,6 +92,7 @@ const SignUp = () => {
         </Typography>
       </Box>
     </Container>
+    </div>
   );
 };
 

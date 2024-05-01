@@ -26,7 +26,7 @@ const createBook = async (req: CustomRequest, res: Response) => {
       description,
       isbn,
       CoverImageURL,
-      createdBy: req.user._id,
+      
   
     });
     const book = await newBook.save();
@@ -41,7 +41,7 @@ const createBook = async (req: CustomRequest, res: Response) => {
 // Get book by id
 const getBookById = async (req: Request, res: Response) => {
   try {
-    const book = await Book.findById(req.params.id).populate("createdBy");
+    const book = await Book.findById(req.params.id).populate("title");
     if (!book) {
       console.log("Book not found");
       return res.status(404).json({ message: 'Book not found' });

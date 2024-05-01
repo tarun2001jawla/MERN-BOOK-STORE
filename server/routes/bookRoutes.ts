@@ -7,7 +7,7 @@ import { checkAdminRole } from '../middlewares/authentication';
 
 // Book routes
 router.get('/', bookControllers.getAllBooks);
-router.post('/', checkAdminRole, bookControllers.createBook);
+router.post('/', bookControllers.createBook);
 router.get('/:id', bookControllers.getBookById);
 router.delete('/:id',checkAdminRole, bookControllers.deleteBook);
 

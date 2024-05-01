@@ -4,6 +4,8 @@
   align-items: center;
   min-height: 50vh; /* Reduce the height of the container */
   margin-top: 60px;
+  width: '60%';
+  
  
 }
 
