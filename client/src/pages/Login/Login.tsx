@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import React, { ChangeEvent, useState } from 'react';
 import { Box, Button, TextField, Typography, Container, IconButton, InputAdornment } from '@mui/material';
 import axios from 'axios';
+import { Bounce, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 
 import { Link} from "react-router-dom";
@@ -22,9 +24,21 @@ const Login: React.FC = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/user/login', formData, { withCredentials: true });
       console.log('Login successful:', JSON.stringify(response.data));
+      toast('👍 Login successful!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       // Set the JWT token in a cookie
       document.cookie = `token=${response.data.token}; path=/`;
       setFormData({ email: '', password: '' }); // Reset form data after successful submission
+      
       navigate('/'); // Redirect to the home page
     } catch (error) {
       console.error('Error occurred while logging in:', error);

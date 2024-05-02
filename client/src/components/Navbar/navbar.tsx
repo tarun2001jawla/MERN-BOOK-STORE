@@ -5,7 +5,7 @@ import { AppBar, Toolbar, Typography, Button, InputBase } from '@material-ui/cor
 import SearchIcon from '@material-ui/icons/Search';
 import UserNavigation from '../../components/UserNavigation';
 import { getCookie } from '../../utils/cookieUtil';
-import { decodeToken } from '../../utils/jwtUtil';
+// import { decodeToken } from '../../utils/jwtUtil';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -52,16 +52,10 @@ const BookstoreNavbar: React.FC = () => {
   useEffect(() => {
     // Check if the user is logged in when the component mounts
     const token = getCookie('token');
-    console.log(token)
-    if (token) {
-      const decodedToken = decodeToken(token);
-      if (decodedToken) {
-        // If a valid token is present, set the user as logged in
-        setIsLoggedIn(true);
-        setUserName(decodedToken.name); // Set the user's name from the token payload
-        setCartItemCount(2); // Replace with the user's cart item count from the token
-      }
-    }
+    console.log("Token is :",token)
+    setIsLoggedIn(true);
+        setUserName("Tarun Jawla"); // Set the user's name from the token payload
+        setCartItemCount(2);
   }, []);
 
   const handleLogout = () => {
@@ -99,8 +93,8 @@ const BookstoreNavbar: React.FC = () => {
             <Button component={Link} to="/about" color="inherit">
               About Us
             </Button>
-            <Button component={Link} to="/contact" color="inherit">
-              Contact Us
+            <Button component={Link} to="/addBook" color="inherit">
+              Add a Book
             </Button>
           </div>
           <div>

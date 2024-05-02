@@ -34,7 +34,8 @@ const bookScehma: Schema = new mongoose.Schema(
     },
     CoverImageURL: {
       type: String,
-      required: true,
+      required :false,
+      
     },
   
   },

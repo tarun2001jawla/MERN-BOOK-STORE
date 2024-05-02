@@ -15,11 +15,13 @@ interface User {
 
 function setUser(user: User): string {
   try {
+    console.log('Key:', key);
     const token = jwt.sign(
       { _id: user._id, email: user.email, role: user.role },
       key!,
       { expiresIn: ms('1h') }
     );
+    console.log('Arguments to jwt.sign:', jwt.sign);
     console.log('Token generated:', token);
     return token;
   } catch (error) {

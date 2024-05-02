@@ -2,6 +2,9 @@ import React, { ChangeEvent, useState } from 'react';
 import { Box, Button, TextField, Typography, Container, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import axios from 'axios';
+import { toast,Bounce } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './Signup.css';
 import { Link } from "react-router-dom";
 
@@ -24,8 +27,18 @@ const SignUp :React.FC = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/user/signup', formData);
       console.log('Response:', response);
-      alert('Signup successful');
-     
+      toast('🎉 Signup successful!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      
       setFormData({
         name: '',
         password: '',

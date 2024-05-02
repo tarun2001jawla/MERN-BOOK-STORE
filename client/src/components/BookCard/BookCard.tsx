@@ -19,7 +19,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, handleDeleteFromCart,handleAd
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card>
-        <CardMedia component="img" alt={book.title} height="200" image={book.CoverImageURL} title={book.title} />
+        <CardMedia component="img" alt={book.title} height="200" src={`/images/${book.CoverImageURL}`} title={book.title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {book.title}

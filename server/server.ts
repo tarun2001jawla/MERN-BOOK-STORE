@@ -2,9 +2,8 @@ import express, { Application, Request, Response ,Router} from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 import path from "path";
-import ejs from 'ejs';
 import { checkForAuthentication } from "./middlewares/authentication";
 import authRoutes from "./routes/authRoutes";
 import bookRoutes from "./routes/bookRoutes";
@@ -21,9 +20,9 @@ dotenv.config();
 // Initialize Express app
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
-// Set the view engine to ejs
-app.set('view engine', 'ejs');
-app.set("views", path.resolve("./views"));
+
+
+
 //middlewares
 app.use(express.json());
 app.use(cors({
@@ -35,18 +34,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthentication);
 
+
 // Database connection
 mongoose
   .connect(process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/bookstore", {})
   .then(() => console.log("MongoDB connection established"))
   .catch((err) => console.error("MongoDB connection error:", err));
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
 
+  app.use('/images', express.static(path.join(__dirname, '..', 'public')));
+// Serve the images from the public folder
+// app.use(express.static('public'));
+app.get('/images/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filepath = `public/${filename}`;
+  res.sendFile(filepath);
+});
 //Routes
 app.use("/api/user", authRoutes);
-app.use("/api/books",bookRoutes);
+app.use("/api/books", bookRoutes);
 
 app.get('/', async (req:CustomRequest, res:Response) => {
   const allBooks = await Books.find({}).sort({ createdAt: -1 }).populate("title")
@@ -61,10 +66,6 @@ app.get('/', async (req:CustomRequest, res:Response) => {
   });
 });
 
-// // Route for the home page
-// staticRouter.get('/', (req: Request, res: Response) => {
-//   res.render('index', { title: 'Home Page' });
-// });
 
 // Start the server
 app.listen(PORT, () => {

@@ -47,6 +47,7 @@ const handleUserLogin = async (req: Request, res: Response) => {
     const token = setUser(user);
     console.log('Token generated:', token);
     // Send the token in the response
+
     res.status(200).json({ message: 'Login successful', user: user, token });
   } catch (err) {
     console.error('Error in login:', err);

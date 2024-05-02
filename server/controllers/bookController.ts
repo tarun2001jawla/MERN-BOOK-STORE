@@ -1,6 +1,39 @@
 import { Request, Response } from "express";
 import Book from "../models/Book";
 import { CustomRequest } from "../types";
+import multer from 'multer';
+import path from "path";
+import fs from 'fs';
+
+// Set up multer storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Define the upload folder path
+    const uploadFolder = path.resolve(__dirname, '..//../server/public');
+        
+
+    // Set the upload folder
+    cb(null, uploadFolder);
+
+    // Check if the directory exists, if not, create it
+    if (!fs.existsSync(uploadFolder)) {
+      fs.mkdirSync(uploadFolder, { recursive: true });
+    }
+  },
+  filename: (req, file, cb) => {
+    // Generate a unique filename based on current timestamp
+    const extension = path.extname(file.originalname);
+    const timestamp = Date.now();
+    const filename = `book-cover-${timestamp}${extension}`;
+    cb(null, filename);
+  }
+});
+
+// Initialize multer with storage options
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 20 } // Limit file size to 20MB
+});
 
 // Get all books
 const getAllBooks = async (req: Request, res: Response) => {
@@ -16,9 +49,16 @@ const getAllBooks = async (req: Request, res: Response) => {
 };
 
 // Create a new book
+
 const createBook = async (req: CustomRequest, res: Response) => {
   try {
-    const { title, author, price, description, isbn, CoverImageURL } = req.body;
+    console.log('req.user in createBook:', req.user); 
+    const { title, author, price, description, isbn } = req.body;
+    console.log("req body",req.body);
+    console.log('Uploaded file:', req.file);
+    const CoverImageURL = req.file ? `/images/${req.file.filename}` : '';
+    console.log('URL:', CoverImageURL);// Get the uploaded file path
+
     const newBook = new Book({
       title,
       author,
@@ -26,9 +66,8 @@ const createBook = async (req: CustomRequest, res: Response) => {
       description,
       isbn,
       CoverImageURL,
-      
-  
     });
+
     const book = await newBook.save();
     console.log("New book created successfully:", book);
     res.status(201).json(book);
@@ -72,7 +111,7 @@ const deleteBook = async (req: Request, res: Response) => {
 
 export default {
   getAllBooks,
-  createBook,
+  createBook, // Use multer's upload.single middleware for file upload
   getBookById,
   deleteBook
-}
+};
