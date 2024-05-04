@@ -7,6 +7,8 @@ import path from "path";
 import { checkForAuthentication } from "./middlewares/authentication";
 import authRoutes from "./routes/authRoutes";
 import bookRoutes from "./routes/bookRoutes";
+import orderRoutes from './routes/orderRoutes'
+import cartRoutes from './routes/cartRoutes'
 import { CustomRequest } from "./types";
 import Books from "./models/Book";
 
@@ -41,17 +43,19 @@ mongoose
   .then(() => console.log("MongoDB connection established"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-  app.use('/images', express.static(path.join(__dirname, '..', 'public')));
+  // app.use('/images', express.static(path.join(__dirname, '..', 'public')));
 // Serve the images from the public folder
 // app.use(express.static('public'));
 app.get('/images/:filename', (req, res) => {
   const filename = req.params.filename;
-  const filepath = `public/${filename}`;
-  res.sendFile(filepath);
+  const filepath = path.join(__dirname, 'public', filename);
+  res.sendFile(filepath, { root: '' });
 });
 //Routes
 app.use("/api/user", authRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/api/orders", cartRoutes);
+app.use("/api/showorders", orderRoutes);
 
 app.get('/', async (req:CustomRequest, res:Response) => {
   const allBooks = await Books.find({}).sort({ createdAt: -1 }).populate("title")

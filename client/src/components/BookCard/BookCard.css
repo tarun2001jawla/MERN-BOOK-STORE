@@ -1,0 +1,38 @@
+.book-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .book-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  
+  .book-card__content {
+    flex-grow: 1;
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .book-card__title {
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .book-card__author {
+    margin-bottom: 4px;
+  }
+  
+  .book-card__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+  }
+  
+  .book-card__delete-button {
+    margin-left: 8px;
+  }

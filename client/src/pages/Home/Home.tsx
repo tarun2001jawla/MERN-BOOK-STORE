@@ -1,54 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Grid } from '@material-ui/core';
-import HeroSection from '../../components/Herosection';
-import BookCard from '../../components/BookCard/BookCard'; // Import the BookCard component
+import React from 'react';
 
-interface Book {
-  _id: string;
-  title: string;
-  author: string;
-  CoverImageURL: string;
-  price: number;
-}
+import HeroSection from '../../components/HeroSection/Herosection';
+import FeaturedBooks from '../../components/Featuredbooks/FeaturedBooks';
+//import Testimonials from '../../components/Testimonials/Testimonials';
+import BookGenres from '../../components/BookGenre/BookGenre';
+import Footer from '../../components/Footer/Footer';
+import './Home.css';
 
-const HomePage: React.FC = () => {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [error, setError] = useState<string>('');
-
-  useEffect(() => {
-    fetchAllBooks();
-  }, []);
-
-  const fetchAllBooks = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/books');
-      setBooks(response.data);
-    } catch (err) {
-      console.error(err);
-      setError('Error fetching books');
-    }
-  };
-
+const HomePage :React.FC = () => {
   return (
-    <div>
-      <HeroSection imageUrl={'/public/7945313.jpg'} />
-      <h1>All Books</h1>
-      {error && <p>{error}</p>}
-      <div className="book-list">
-        <Grid container spacing={3}>
-          {books.map((book) => (
-            <BookCard key={book._id} book={book} handleDeleteFromCart={() => {
-                console.log('delete from cart',book.title);
-            }} handleAddToCart={()=>{
-                console.log('Adding book to cart:',book._id)
-            }}/>
-            
-          ))}
-        </Grid>
-      </div>
+    <div className="homepage">
+      
+      <HeroSection imageUrl={'/public/7945313.jpg'} title={'Shop Now'} subtitle={''} />
+      <FeaturedBooks />
+      <BookGenres/>
+      <Footer />
     </div>
   );
 };
 
 export default HomePage;
+

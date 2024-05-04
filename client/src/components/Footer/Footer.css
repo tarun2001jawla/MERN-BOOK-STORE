@@ -1,0 +1,27 @@
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  
+  .footer__section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .footer__section-description {
+    line-height: 1.5;
+  }
+  
+  .footer__links {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer__links a {
+    color: #fff;
+    text-decoration: none;
+  }

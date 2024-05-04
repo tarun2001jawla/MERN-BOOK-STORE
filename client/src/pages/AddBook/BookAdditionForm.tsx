@@ -10,13 +10,15 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
 const axiosInstance = axios.create({
-    withCredentials: true, // Include cookies in the request
-  });
+  withCredentials: true, // Include cookies in the request
+});
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
+      marginBottom: theme.spacing(2),
     },
   },
   formHeading: {
@@ -37,8 +39,8 @@ const BookAdditionForm = () => {
     author: '',
     price: '',
     description: '',
+    quantity: '',
     isbn: '',
-    
   });
   const [coverImage, setCoverImage] = useState<File | null>(null);
 
@@ -51,7 +53,7 @@ const BookAdditionForm = () => {
     e.preventDefault();
     console.log('Form submitted with data:', book);
     // Validate form fields
-    if (!book.title || !book.author || !book.price || !book.isbn || !book.description) {
+    if (!book.title || !book.author || !book.price || !book.isbn || !book.description || !book.quantity) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -62,6 +64,7 @@ const BookAdditionForm = () => {
     formData.append('author', book.author);
     formData.append('price', book.price);
     formData.append('isbn', book.isbn);
+    formData.append('quantity', book.quantity);
     formData.append('description', book.description);
     if (coverImage) formData.append('coverImage', coverImage);
 
@@ -82,13 +85,13 @@ const BookAdditionForm = () => {
         pauseOnHover: true,
         draggable: true,
       });
-      document.cookie = `token=${response.data.token}; path=/`;
       // Reset form fields
       setBook({
         title: '',
         author: '',
         price: '',
         isbn: '',
+        quantity: '',
         description: '',
       });
       setCoverImage(null);
@@ -171,6 +174,18 @@ const BookAdditionForm = () => {
               label="Description"
               name="description"
               value={book.description}
+              onChange={handleChange}
+              multiline
+              minRows={4}
+              fullWidth
+              required
+            />
+          </Grid>
+          <Grid item xs={12} className={classes.formItem}>
+            <TextField
+              label="Quantity"
+              name="quantity"
+              value={book.quantity}
               onChange={handleChange}
               multiline
               minRows={4}

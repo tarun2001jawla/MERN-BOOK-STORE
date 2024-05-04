@@ -1,0 +1,34 @@
+.featured-books {
+    padding: 2rem;
+  }
+  
+  .featured-books__title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .featured-books__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  
+  .featured-books__item {
+    text-align: center;
+  }
+  
+  .featured-books__image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .featured-books__book-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .featured-books__book-author {
+    color: #888;
+  }

@@ -53,7 +53,7 @@ const getAllBooks = async (req: Request, res: Response) => {
 const createBook = async (req: CustomRequest, res: Response) => {
   try {
     console.log('req.user in createBook:', req.user); 
-    const { title, author, price, description, isbn } = req.body;
+    const { title, author, price, description,quantity, isbn } = req.body;
     console.log("req body",req.body);
     console.log('Uploaded file:', req.file);
     const CoverImageURL = req.file ? `/images/${req.file.filename}` : '';
@@ -65,6 +65,7 @@ const createBook = async (req: CustomRequest, res: Response) => {
       price,
       description,
       isbn,
+      quantity,
       CoverImageURL,
     });
 

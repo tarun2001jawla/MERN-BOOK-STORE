@@ -11,13 +11,14 @@ interface User {
   _id: string;
   email: string;
   role: string;
+  name : string;
 }
 
 function setUser(user: User): string {
   try {
     console.log('Key:', key);
     const token = jwt.sign(
-      { _id: user._id, email: user.email, role: user.role },
+      {  _id: user._id, email: user.email, role: user.role, name: user.name },
       key!,
       { expiresIn: ms('1h') }
     );

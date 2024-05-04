@@ -1,38 +1,102 @@
+/* General Styles */
+.about-us {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
 
-.container {
-    width: 100%;
-    position: relative;
-    background-color: #f8f8f8;
-    overflow: hidden;
-    text-align: center;
-    font-size: 24px;
-    color: #333;
-    font-family: Arial, sans-serif;
-  }
-  
-  .banner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 300px;
-    
-    background-size: cover;
-  }
-  
-  .content {
-    padding: 50px;
-  }
-  
-  .title {
-    margin-bottom: 20px;
-    font-size: 36px;
-    font-weight: bold;
-  }
-  
-  .description,
-  .mission,
-  .contact {
-    margin-bottom: 40px;
-  }
-  
+.section {
+  margin-bottom: 3rem;
+}
+
+.section__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section__text {
+  line-height: 1.6;
+}
+
+/* Team Members */
+.team-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-member__photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.team-member__name {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.team-member__bio {
+  color: #666;
+}
+
+/* Testimonials */
+.testimonial {
+  background-color: #f8f8f8;
+  padding: 2rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.testimonial__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.testimonial__quote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial__name {
+  font-weight: bold;
+}
+
+.testimonial__nav-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.testimonial__nav-btn:hover {
+  background-color: #555;
+}
+
+
+/* Button */
+.btn {
+  display: inline-block;
+  background-color: #333;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #555;
+}

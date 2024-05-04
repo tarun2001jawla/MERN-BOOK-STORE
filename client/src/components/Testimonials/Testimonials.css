@@ -1,0 +1,39 @@
+.testimonials {
+    padding: 2rem;
+    background-color: #f8f8f8;
+  }
+  
+  .testimonials__title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .testimonials__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .testimonials__item {
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .testimonials__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonials__quote {
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonials__name {
+    font-weight: bold;
+  }

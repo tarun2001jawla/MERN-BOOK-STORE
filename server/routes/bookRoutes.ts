@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 * 20 } });
 // Book routes
 router.get('/',  bookControllers.getAllBooks);
-router.post('/', checkAdminRole,upload.single('coverImage'), bookControllers.createBook); // Apply multer middleware here
+router.post('/', checkAdminRole, upload.single('coverImage'), bookControllers.createBook); // Apply multer middleware here
 router.get('/:id', bookControllers.getBookById);
 router.delete('/:id',checkAdminRole, bookControllers.deleteBook);
 

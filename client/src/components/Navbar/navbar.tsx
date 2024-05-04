@@ -3,9 +3,9 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import UserNavigation from '../../components/UserNavigation';
+import UserNavigation from './UserNavigation';
 import { getCookie } from '../../utils/cookieUtil';
-// import { decodeToken } from '../../utils/jwtUtil';
+import { decodeToken } from '../../utils/jwtUtil';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -52,10 +52,16 @@ const BookstoreNavbar: React.FC = () => {
   useEffect(() => {
     // Check if the user is logged in when the component mounts
     const token = getCookie('token');
-    console.log("Token is :",token)
-    setIsLoggedIn(true);
-        setUserName("Tarun Jawla"); // Set the user's name from the token payload
-        setCartItemCount(2);
+console.log('Token value:', token);
+    if (token) {
+      const decoded = decodeToken(token);
+      if (decoded) {
+        setIsLoggedIn(true);
+        setUserName(decoded.name); // Use the name property from the decoded payload
+        // Set the cart item count if available in the token payload or from the server
+        setCartItemCount(2); // Replace this with the actual cart item count
+      }
+    }
   }, []);
 
   const handleLogout = () => {
@@ -89,12 +95,15 @@ const BookstoreNavbar: React.FC = () => {
             <Button component={Link} to="/" color="inherit">
               Home
             </Button>
-            <Button color="inherit">Books</Button>
+            <Button component={Link} to="/books" color="inherit">Books</Button>
             <Button component={Link} to="/about" color="inherit">
               About Us
             </Button>
             <Button component={Link} to="/addBook" color="inherit">
               Add a Book
+            </Button>
+            <Button component={Link} to="/contact" color="inherit">
+              Contact Us
             </Button>
           </div>
           <div>

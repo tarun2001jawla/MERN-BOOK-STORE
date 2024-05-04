@@ -1,17 +1,18 @@
-import nodePolyfills from "rollup-plugin-polyfill-node";
-import { defineConfig } from "vite";
-import { nodeModulesPolyfillPlugin } from "esbuild-plugins-node-modules-polyfill";
+
+import { defineConfig } from 'vite';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 export default defineConfig({
-  optimizeDeps: {
-    esbuildOptions: {
-      // Enable esbuild polyfill plugins
-      plugins: [nodeModulesPolyfillPlugin()],
-    },
-  },
+  // ... other config options
   build: {
     rollupOptions: {
-      plugins: [nodePolyfills()],
+      plugins: [
+        // @ts-expect-error sdd
+        nodePolyfills({
+          crypto: true,
+          process: true, 
+        }),
+      ],
     },
   },
 });
