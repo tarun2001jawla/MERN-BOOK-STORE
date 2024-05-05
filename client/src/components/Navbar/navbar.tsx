@@ -5,7 +5,7 @@ import { AppBar, Toolbar, Typography, Button, InputBase } from '@material-ui/cor
 import SearchIcon from '@material-ui/icons/Search';
 import UserNavigation from './UserNavigation';
 import { getCookie } from '../../utils/cookieUtil';
-import { decodeToken } from '../../utils/jwtUtil';
+//import { decodeToken } from '../../utils/jwtUtil';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -52,17 +52,14 @@ const BookstoreNavbar: React.FC = () => {
   useEffect(() => {
     // Check if the user is logged in when the component mounts
     const token = getCookie('token');
-console.log('Token value:', token);
     if (token) {
-      const decoded = decodeToken(token);
-      if (decoded) {
-        setIsLoggedIn(true);
-        setUserName(decoded.name); // Use the name property from the decoded payload
-        // Set the cart item count if available in the token payload or from the server
-        setCartItemCount(2); // Replace this with the actual cart item count
-      }
+      //const decoded = decodeToken(token);
+      setIsLoggedIn(true);
+      setUserName("Tarun Jawla");
+      // Set the cart item count if available in the token payload or from the server
+      setCartItemCount(2); // Replace this with the actual cart item count
     }
-  }, []);
+  }, [])
 
   const handleLogout = () => {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';

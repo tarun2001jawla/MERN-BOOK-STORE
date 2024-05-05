@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import Order from "../models/Order";
 import Book from "../models/Book";
 
+
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { items } = req.body;
+    const { items ,address} = req.body;
 
     // Calculate total price of the order
     const totalPrice = items.reduce(
@@ -15,7 +16,7 @@ const createOrder = async (req: Request, res: Response) => {
     );
 
     // Create a new order instance
-    const order = new Order({ items, totalPrice });
+    const order = new Order({ items, totalPrice, address });
 
     // Save the order to the database
     await order.save();

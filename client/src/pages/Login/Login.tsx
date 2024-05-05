@@ -37,6 +37,7 @@ const Login: React.FC = () => {
       });
       // Set the JWT token in a cookie
       document.cookie = `token=${response.data.token}; path=/`;
+      console.log(`token=${response.data.token}`);
       setFormData({ email: '', password: '' }); // Reset form data after successful submission
       
       navigate('/'); // Redirect to the home page

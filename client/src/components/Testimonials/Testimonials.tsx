@@ -20,7 +20,7 @@ const testimonials = [
     quote: "Bookworm's Paradise is my go-to place for finding rare and hard-to-find books. Their collection is truly impressive.",
     avatarUrl: '../../../public/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction.jpg',
   },
-  // Add more testimonials as needed
+  
 ];
 
 const Testimonials :React.FC = () => {
