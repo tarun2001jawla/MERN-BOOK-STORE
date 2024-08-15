@@ -20,7 +20,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "buffer": "^6.0.3",
     "emailjs-com": "^3.2.0",
     "esbuild-plugins-node-modules-polyfill": "^1.6.3",
